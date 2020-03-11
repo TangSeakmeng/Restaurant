@@ -16,7 +16,7 @@ public class CenterScreenJFrame {
     public static void CenteredFrame(javax.swing.JFrame objFrame){
         Dimension objDimension = Toolkit.getDefaultToolkit().getScreenSize();
         int iCoordX = (objDimension.width - objFrame.getWidth()) / 2;
-        int iCoordY = (objDimension.height - objFrame.getHeight()) / 2;
+        int iCoordY = (objDimension.height - objFrame.getHeight()) / 2 - 10;
         objFrame.setLocation(iCoordX, iCoordY); 
     } 
 }

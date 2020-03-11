@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -163,7 +162,7 @@ public class Service {
             p_sql.setString(1, s.getServiceBarcode());
             p_sql.setString(2, s.getServiceName());
             p_sql.setString(3, s.getCategoryId());
-            p_sql.setString(4, getProductIdUsingBarcode(s.getProductBarcode())+ "");
+            p_sql.setString(4, Product.getProductIdUsingBarcode(s.getProductBarcode())+ "");
             p_sql.setString(5, s.getSalePrice()+ "");
             p_sql.setString(6, s.getImagePath()+ "");
             
@@ -202,85 +201,7 @@ public class Service {
         return count;
     }
     
-    public static int getProductIdUsingBarcode(String barcode)
-    {
-        int productId = 0;
-        
-        try
-        {
-            String sql = "select id from tblProduct where barcode = '" + barcode + "'";
-            
-            Statement s = DataConnection.getDataCon().createStatement();
-            ResultSet r = s.executeQuery(sql);
-            
-            while(r.next())
-            {
-                productId = Integer.parseInt("" + r.getString(1));
-            }
-            
-            r.close();
-        } 
-        catch (NumberFormatException | SQLException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        return productId;
-    }
-    
-    public static int getProductIdUsingProductName(String productName)
-    {
-        int productId = 0;
-        
-        try
-        {
-            String sql = "select id from tblProduct where name = '" + productName + "'";
-            
-            Statement s = DataConnection.getDataCon().createStatement();
-            ResultSet r = s.executeQuery(sql);
-            
-            while(r.next())
-            {
-                productId = Integer.parseInt("" + r.getString(1));
-            }
-            
-            r.close();
-        } 
-        catch (NumberFormatException | SQLException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        return productId;
-    }
-    
-    public static String getProductNameUsingProductBarcode(String Barcode)
-    {
-        String productName = "";
-        
-        try
-        {
-            String sql = "select name from tblProduct where barcode = '" + Barcode + "'";
-            
-            Statement s = DataConnection.getDataCon().createStatement();
-            ResultSet r = s.executeQuery(sql);
-            
-            while(r.next())
-            {
-                productName = "" + r.getString(1);
-            }
-            
-            r.close();
-        } 
-        catch (NumberFormatException | SQLException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        return productName;
-    }
-    
-    public static void deleteProductByBarcode(String barcode)
+    public static void deleteServiceByBarcode(String barcode)
     {
         try {
             String sql = "delete from tblService where barcode = ?";
@@ -298,7 +219,7 @@ public class Service {
         }
     }
     
-    public static void updateProductByBarcode(Service s)
+    public static void updateServiceByBarcode(Service s)
     {
         try 
         {
@@ -307,7 +228,7 @@ public class Service {
             p.setString(1, s.getServiceName());
             p.setString(2, s.getSalePrice() + "");
             p.setString(3, ServiceCategory.getCategoryIdFromDB(s.getCategoryName())+ "");
-            p.setString(4, getProductIdUsingBarcode(s.getProductBarcode()) + "");
+            p.setString(4, Product.getProductIdUsingBarcode(s.getProductBarcode()) + "");
             p.setString(5, s.getImagePath());
             p.setString(6, s.getServiceBarcode());
             

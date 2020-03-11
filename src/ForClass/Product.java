@@ -6,6 +6,9 @@
 package ForClass;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -202,7 +205,7 @@ public class Product {
             s.execute();
             s.close();
         } 
-        catch (Exception e) 
+        catch (SQLException e) 
         {
             System.out.println(e.getMessage());
         }
@@ -222,5 +225,167 @@ public class Product {
         {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public static void updateProductFromDB(Product product)
+    {
+        try 
+        {
+            String sql = "update tblproduct set name = ?, categoryid = ?, unitinstock = ?, costofsale = ?, saleprice = ?, image = ?"
+                    + " where barcode = ?";
+            
+            PreparedStatement s = DataConnection.getDataCon().prepareStatement(sql);
+            
+            s.setString(1, product.getProductName());
+            s.setString(2, product.getCategoryId());
+            s.setString(3, product.getUnitInStock() + "");
+            s.setString(4, product.getCostOfSale() + "");
+            s.setString(5, product.getSalePrice() + "");
+            s.setString(6, product.getImagePath() + "");
+            s.setString(7, product.getProductBarcode()+ "");
+            
+            s.execute();
+            s.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static Product getProductUsingProductBarcode(String barcode)
+    {
+        Product product = new Product();
+        
+        try 
+        {
+            String sql = "select p.name, c.categoryName, costofsale, saleprice, "
+                    + "image from tblProduct p inner join tblcategory c on p.categoryid = c.id where p.barcode = '" + barcode + "'";
+            
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                product.setProductName(r.getString(1) + "");
+                product.setCategoryName(r.getString(2) + "");
+                product.setCostOfSale(Float.parseFloat(r.getString(3) + ""));
+                product.setSalePrice(Float.parseFloat(r.getString(4) + ""));
+                product.setImagePath(r.getString(5) + "");
+            }
+            
+            r.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return product;
+    }
+    
+    public static int getProductIdUsingBarcode(String barcode)
+    {
+        int productId = 0;
+        
+        try
+        {
+            String sql = "select id from tblProduct where barcode = '" + barcode + "'";
+            
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                productId = Integer.parseInt("" + r.getString(1));
+            }
+            
+            r.close();
+        } 
+        catch (NumberFormatException | SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return productId;
+    }
+    
+    public static int getProductIdUsingProductName(String productName)
+    {
+        int productId = 0;
+        
+        try
+        {
+            String sql = "select id from tblProduct where name = '" + productName + "'";
+            
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                productId = Integer.parseInt("" + r.getString(1));
+            }
+            
+            r.close();
+        } 
+        catch (NumberFormatException | SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return productId;
+    }
+    
+    public static String getProductNameUsingProductBarcode(String Barcode)
+    {
+        String productName = "";
+        
+        try
+        {
+            String sql = "select name from tblProduct where barcode = '" + Barcode + "'";
+            
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                productName = "" + r.getString(1);
+            }
+            
+            r.close();
+        } 
+        catch (NumberFormatException | SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return productName;
+    }
+    
+    public static boolean isExistedInProductDB(String barcode)
+    {
+        boolean result = false;
+        
+        try
+        {
+            String sql = "select count(*) from tblProduct where barcode = '" + barcode + "'";
+            
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                if(Integer.parseInt(r.getString(1) + "") > 0)
+                    result = true;
+            }
+            
+            r.close();
+        } 
+        catch (NumberFormatException | SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return result;
     }
 }

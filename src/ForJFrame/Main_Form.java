@@ -36,7 +36,6 @@ import java.awt.FlowLayout;
  */
 
 public class Main_Form extends javax.swing.JFrame implements Runnable{
-
     /**
      * Creates new form Main_Form
      */
@@ -52,6 +51,10 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
         th.start();
         
         initComponents();
+        
+        lbUserAccount.setText(Log_In_Form.getGlobal_username());
+        
+        lblPanelName1.setText("Main Form");
     }
     
     public void DashBoardPicture()
@@ -81,13 +84,16 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
         jLabel2 = new javax.swing.JLabel();
         lbDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lbUserAccount = new javax.swing.JLabel();
         btnExit = new javax.swing.JToggleButton();
         pnMain = new javax.swing.JPanel();
         jPictureBox1 = new ForComponent.JPictureBox();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        lblPanelName = new javax.swing.JLabel();
+        lblPanelName1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lbUserAccount = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -125,9 +131,9 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
                 formWindowOpened(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
-        btnLogOut.setBackground(new java.awt.Color(255, 0, 102));
+        btnLogOut.setBackground(new java.awt.Color(102, 102, 0));
         btnLogOut.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         btnLogOut.setForeground(new java.awt.Color(255, 255, 255));
         btnLogOut.setText("Log Out");
@@ -136,31 +142,34 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
                 btnLogOutActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(1740, 880, 113, 60));
+        getContentPane().add(btnLogOut);
+        btnLogOut.setBounds(1750, 890, 113, 60);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Time :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 880, -1, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(30, 890, 39, 17);
 
         lbTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbTime.setText("None");
-        getContentPane().add(lbTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 880, -1, -1));
+        getContentPane().add(lbTime);
+        lbTime.setBounds(80, 890, 230, 17);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Date :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 910, -1, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 920, 38, 17);
 
         lbDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbDate.setText("None");
-        getContentPane().add(lbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 910, -1, -1));
+        getContentPane().add(lbDate);
+        lbDate.setBounds(80, 920, 260, 17);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 51, 102));
         jLabel3.setText("User Account :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
-
-        lbUserAccount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbUserAccount.setText("None");
-        getContentPane().add(lbUserAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(1390, 30, 140, 22);
 
         btnExit.setBackground(new java.awt.Color(0, 153, 153));
         btnExit.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -171,7 +180,8 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1630, 880, 99, 60));
+        getContentPane().add(btnExit);
+        btnExit.setBounds(1640, 890, 99, 60);
 
         pnMain.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -186,7 +196,7 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
         );
         jPictureBox1Layout.setVerticalGroup(
             jPictureBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 808, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
@@ -197,20 +207,63 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPictureBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPictureBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(pnMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1830, 810));
+        getContentPane().add(pnMain);
+        pnMain.setBounds(30, 80, 1830, 800);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ForIcon/settings_48px.png"))); // NOI18N
-        jButton1.setText("Setting");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 880, 130, -1));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1790, 10, 70, 60);
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel4.setText("Multi-Tasking :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1590, 10, -1, -1));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 29, 103, 19);
 
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 10, 160, -1));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(139, 26, 160, 26);
+
+        lblPanelName.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        lblPanelName.setForeground(new java.awt.Color(255, 51, 102));
+        lblPanelName.setText("|");
+        getContentPane().add(lblPanelName);
+        lblPanelName.setBounds(1370, 10, 10, 50);
+
+        lblPanelName1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        lblPanelName1.setForeground(new java.awt.Color(255, 51, 102));
+        lblPanelName1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPanelName1.setText("Panel Name");
+        getContentPane().add(lblPanelName1);
+        lblPanelName1.setBounds(1030, 20, 330, 47);
+
+        jPanel1.setBackground(new java.awt.Color(255, 51, 102));
+
+        lbUserAccount.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbUserAccount.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserAccount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbUserAccount.setText("None");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbUserAccount, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lbUserAccount)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(1540, 20, 240, 50);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -389,6 +442,8 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void muUserManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muUserManagementActionPerformed
+        lblPanelName1.setText("User Management");
+        
         User_Management um = new User_Management();
         AddJPanelFormToJPanel(um);
     }//GEN-LAST:event_muUserManagementActionPerformed
@@ -403,21 +458,29 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        lblPanelName1.setText("Inventory Management");
+        
         Product_Managment um = new Product_Managment();
         AddJPanelFormToJPanel(um);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        lblPanelName1.setText("Staff Management");
+        
         Staff_Management um = new Staff_Management();
         AddJPanelFormToJPanel(um);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void muTableBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muTableBookingActionPerformed
+        lblPanelName1.setText("Table Booking Transaction");
+        
         Booking_Transaction tb = new Booking_Transaction();
         AddJPanelFormToJPanel(tb);
     }//GEN-LAST:event_muTableBookingActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        lblPanelName1.setText("Main Form");
+        
         pnMain.removeAll();
         pnMain.setLayout(new java.awt.BorderLayout());
         pnMain.setVisible(true);
@@ -429,61 +492,85 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void muTableBookingDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muTableBookingDetailsActionPerformed
+        lblPanelName1.setText("Table Booking History");
+        
         Booking_Details bd = new Booking_Details();
         AddJPanelFormToJPanel(bd);
     }//GEN-LAST:event_muTableBookingDetailsActionPerformed
 
     private void muTableCheckInTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muTableCheckInTransactionActionPerformed
+        lblPanelName1.setText("Table Check In Transaction");
+        
         CheckIn_Transaction ct = new CheckIn_Transaction();
         AddJPanelFormToJPanel(ct);
     }//GEN-LAST:event_muTableCheckInTransactionActionPerformed
 
     private void muExpenseTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muExpenseTransactionActionPerformed
+        lblPanelName1.setText("Expense Transaction");
+        
         Expense_Transaction bd = new Expense_Transaction();
         AddJPanelFormToJPanel(bd);
     }//GEN-LAST:event_muExpenseTransactionActionPerformed
 
     private void muExpenseRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muExpenseRecordActionPerformed
+        lblPanelName1.setText("Expense History");
+        
         Expense_Details bd = new Expense_Details();
         AddJPanelFormToJPanel(bd);
     }//GEN-LAST:event_muExpenseRecordActionPerformed
 
     private void muInvoiceRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muInvoiceRecordActionPerformed
+        lblPanelName1.setText("Invoice History");
+        
         Invoice_Details bd = new Invoice_Details();
         AddJPanelFormToJPanel(bd);
     }//GEN-LAST:event_muInvoiceRecordActionPerformed
 
     private void muServiceMangementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muServiceMangementActionPerformed
+        lblPanelName1.setText("Service Management");
+        
         Service_Management sm = new Service_Management();
         AddJPanelFormToJPanel(sm);
     }//GEN-LAST:event_muServiceMangementActionPerformed
 
     private void muOrderServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muOrderServiceActionPerformed
+        lblPanelName1.setText("Order Service Management");
+        
         Order_Transaction ot = new Order_Transaction();
         AddJPanelFormToJPanel(ot);
     }//GEN-LAST:event_muOrderServiceActionPerformed
 
     private void muTableCheckingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muTableCheckingActionPerformed
+        lblPanelName1.setText("Table Check Transaction");
+        
         Table_Checking tc = new Table_Checking();
         AddJPanelFormToJPanel(tc);
     }//GEN-LAST:event_muTableCheckingActionPerformed
 
     private void muImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muImportActionPerformed
+        lblPanelName1.setText("Import Transaction");
+        
         Import_Transaction it = new Import_Transaction();
         AddJPanelFormToJPanel(it);
     }//GEN-LAST:event_muImportActionPerformed
 
     private void muImportRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muImportRecordActionPerformed
+        lblPanelName1.setText("Import History");
+        
         Import_Details id = new Import_Details();
         AddJPanelFormToJPanel(id);
     }//GEN-LAST:event_muImportRecordActionPerformed
 
     private void muOrderDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muOrderDetailsActionPerformed
+        lblPanelName1.setText("Order History");
+        
         Order_Details od = new Order_Details();
         AddJPanelFormToJPanel(od);
     }//GEN-LAST:event_muOrderDetailsActionPerformed
 
     private void muCheckInDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muCheckInDetailsActionPerformed
+        lblPanelName1.setText("Check In History");
+        
         CheckIn_Details cd = new CheckIn_Details();
         AddJPanelFormToJPanel(cd);
     }//GEN-LAST:event_muCheckInDetailsActionPerformed
@@ -522,7 +609,7 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnExit;
     private javax.swing.JToggleButton btnLogOut;
@@ -542,10 +629,13 @@ public class Main_Form extends javax.swing.JFrame implements Runnable{
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     public ForComponent.JPictureBox jPictureBox1;
     private javax.swing.JLabel lbDate;
     private javax.swing.JLabel lbTime;
     private javax.swing.JLabel lbUserAccount;
+    private javax.swing.JLabel lblPanelName;
+    private javax.swing.JLabel lblPanelName1;
     private javax.swing.JMenuItem muCheckInDetails;
     private javax.swing.JMenuItem muExpenseRecord;
     private javax.swing.JMenuItem muExpenseTransaction;

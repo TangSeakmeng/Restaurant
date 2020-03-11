@@ -9,8 +9,10 @@ import ForDialog.Product_Category_Management;
 import ForClass.DataConnection;
 import ForClass.Product;
 import ForClass.ProductCategory;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -31,6 +33,8 @@ public class Product_Managment extends javax.swing.JPanel {
         ImageIcon im = new ImageIcon("C:\\Users\\Tang Seakmeng\\Desktop\\Project\\Restaurant and PUB\\Image\\NoImageFound.png");
         pictureBoxImage.setIcon(im);
         
+        path = "C:\\Users\\Tang Seakmeng\\Desktop\\Project\\Restaurant and PUB\\Image\\NoImageFound.png";
+        
         try 
         {
             String sql = "select CategoryName from tblCategory";
@@ -47,7 +51,7 @@ public class Product_Managment extends javax.swing.JPanel {
             
             r.close();
         } 
-        catch (Exception e) 
+        catch (SQLException e) 
         {
             System.out.println(e.getMessage());
         }
@@ -67,7 +71,7 @@ public class Product_Managment extends javax.swing.JPanel {
             
             r.close();
         } 
-        catch (Exception e) 
+        catch (SQLException e) 
         {
             System.out.println(e.getMessage());
         }
@@ -96,7 +100,6 @@ public class Product_Managment extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         spUnitInStock = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -110,22 +113,27 @@ public class Product_Managment extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBarCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(txtBarCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 61, 148, -1));
+        txtBarCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBarCodeKeyTyped(evt);
+            }
+        });
+        add(txtBarCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 148, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Barcode :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 67, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(txtProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 102, 148, -1));
+        add(txtProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 148, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Product Name :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 108, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Category :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 150, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         txtCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCategory.addActionListener(new java.awt.event.ActionListener() {
@@ -133,32 +141,42 @@ public class Product_Managment extends javax.swing.JPanel {
                 txtCategoryActionPerformed(evt);
             }
         });
-        add(txtCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 145, 81, -1));
+        add(txtCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 81, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Units In Stock :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 193, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         txtCostOfSale.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(txtCostOfSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 228, 148, -1));
+        txtCostOfSale.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostOfSaleKeyTyped(evt);
+            }
+        });
+        add(txtCostOfSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 148, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cost Of Sale :");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 234, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         txtSalePrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(txtSalePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 269, 148, -1));
+        txtSalePrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSalePriceKeyTyped(evt);
+            }
+        });
+        add(txtSalePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 148, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Sale Price :");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 275, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Image :");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 311, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
         btnUploadImage.setBackground(new java.awt.Color(0, 102, 204));
-        btnUploadImage.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnUploadImage.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnUploadImage.setForeground(new java.awt.Color(255, 255, 255));
         btnUploadImage.setText("Upload");
         btnUploadImage.addActionListener(new java.awt.event.ActionListener() {
@@ -166,16 +184,21 @@ public class Product_Managment extends javax.swing.JPanel {
                 btnUploadImageActionPerformed(evt);
             }
         });
-        add(btnUploadImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 107, 44));
+        add(btnUploadImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 140, 44));
 
         btnCancel.setBackground(new java.awt.Color(0, 153, 0));
-        btnCancel.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnCancel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
-        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 740, 130, 53));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 680, 130, 53));
 
         btnInsert.setBackground(new java.awt.Color(204, 51, 255));
-        btnInsert.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnInsert.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +206,10 @@ public class Product_Managment extends javax.swing.JPanel {
                 btnInsertActionPerformed(evt);
             }
         });
-        add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 670, 130, 57));
+        add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 610, 130, 57));
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 51));
-        btnDelete.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -194,14 +217,10 @@ public class Product_Managment extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 131, 57));
-
-        jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jLabel1.setText("Product Management");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 20, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 131, 57));
 
         btnUpdate.setBackground(new java.awt.Color(255, 102, 102));
-        btnUpdate.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -209,10 +228,16 @@ public class Product_Managment extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 131, 57));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 131, 57));
 
         spUnitInStock.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        add(spUnitInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 186, 148, -1));
+        spUnitInStock.setEditor(new javax.swing.JSpinner.NumberEditor(spUnitInStock, "#,##0.##"));
+        spUnitInStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                spUnitInStockKeyTyped(evt);
+            }
+        });
+        add(spUnitInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 148, -1));
 
         subJTableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -230,16 +255,18 @@ public class Product_Managment extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(subJTableProduct);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 61, 1500, 740));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 1500, 710));
 
+        btnMoreCategory.setBackground(new java.awt.Color(0, 153, 153));
         btnMoreCategory.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnMoreCategory.setForeground(new java.awt.Color(255, 255, 255));
         btnMoreCategory.setText("More");
         btnMoreCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMoreCategoryActionPerformed(evt);
             }
         });
-        add(btnMoreCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 143, -1, -1));
+        add(btnMoreCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         pictureBoxImage.setImageMode(ForComponent.JPictureBox.mode.Zoom);
 
@@ -254,7 +281,7 @@ public class Product_Managment extends javax.swing.JPanel {
             .addGap(0, 138, Short.MAX_VALUE)
         );
 
-        add(pictureBoxImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 140, 140));
+        add(pictureBoxImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 140, 140));
     }// </editor-fold>//GEN-END:initComponents
 
     private String path;
@@ -275,8 +302,7 @@ public class Product_Managment extends javax.swing.JPanel {
             product.setProductName(txtProductName.getText().trim());
 
             product.setCategoryId(CategorySelectedId + "");
-            int selectedIndex = txtCategory.getSelectedIndex();
-            product.setCategoryName(txtCategory.getItemAt(selectedIndex));
+            product.setCategoryName(txtCategory.getSelectedItem().toString());
 
             product.setUnitInStock((Integer)spUnitInStock.getValue());
             product.setCostOfSale(Float.parseFloat(txtCostOfSale.getText()));
@@ -288,7 +314,7 @@ public class Product_Managment extends javax.swing.JPanel {
             
             Product.addProductIntoDB(product);
         }  
-        catch (Exception e) 
+        catch (NumberFormatException e) 
         {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -296,22 +322,29 @@ public class Product_Managment extends javax.swing.JPanel {
 
     private int CategorySelectedIndex;
     private int selectedRowIndex;
-    private String CategorySelectedId;
+    private int CategorySelectedId;
     
     private void txtCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryActionPerformed
         CategorySelectedIndex = txtCategory.getSelectedIndex();
-        CategorySelectedId = ProductCategory.getCategoryIdFromDB(txtCategory.getItemAt(CategorySelectedIndex));
+        CategorySelectedId = ProductCategory.getCategoryIdUsingCategoryName(txtCategory.getItemAt(CategorySelectedIndex));
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void subJTableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subJTableProductMouseClicked
         selectedRowIndex = subJTableProduct.getSelectedRow();
 //        JOptionPane.showConfirmDialog(this, subJTableProduct.getRowAt(selectedRowIndex));
         Object[] r = subJTableProduct.getRowAt(selectedRowIndex);
-        String path = r[6] + "";
+        path = r[6] + "";
         ImageIcon im = new ImageIcon(path);
         pictureBoxImage.setIcon(im);
+        
+        txtBarCode.setText(r[0] + "");
+        txtProductName.setText(r[1] + "");
+        txtCategory.setSelectedItem(r[2] + "");
+        spUnitInStock.setValue(Integer.parseInt(r[3] + ""));
+        txtCostOfSale.setText(r[4] + "");
+        txtSalePrice.setText(r[5] + "");
     }//GEN-LAST:event_subJTableProductMouseClicked
-
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int result = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete this item?");
         if(result == 0)
@@ -326,17 +359,101 @@ public class Product_Managment extends javax.swing.JPanel {
             }
             
             subJTableProduct.removeSelectedRow();
+            
+            JOptionPane.showMessageDialog(this, "Delete Successfully!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnMoreCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoreCategoryActionPerformed
-        Product_Category_Management.main(null);
+        Product_Category_Management product_Category_Management = new Product_Category_Management(null, true);
+        product_Category_Management.setVisible(true);
     }//GEN-LAST:event_btnMoreCategoryActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        try {
+            Product product = new Product();
+            product.setProductBarcode(txtBarCode.getText().trim());
+            product.setProductName(txtProductName.getText().trim());
+
+            product.setCategoryId(CategorySelectedId + "");
+            product.setCategoryName(txtCategory.getSelectedItem() + "");
+
+            product.setUnitInStock((Integer)spUnitInStock.getValue());
+            product.setCostOfSale(Float.parseFloat(txtCostOfSale.getText()));
+            product.setSalePrice(Float.parseFloat(txtSalePrice.getText()));
+            product.setImagePath(path);
+            
+            subJTableProduct.setValueAt(product.getProductBarcode(), selectedRowIndex, 0);
+            subJTableProduct.setValueAt(product.getProductName(), selectedRowIndex, 1);
+            subJTableProduct.setValueAt(product.getCategoryName(), selectedRowIndex, 2);
+            subJTableProduct.setValueAt(product.getUnitInStock(), selectedRowIndex, 3);
+            subJTableProduct.setValueAt(product.getCostOfSale(), selectedRowIndex, 4);
+            subJTableProduct.setValueAt(product.getSalePrice(), selectedRowIndex, 5);
+            subJTableProduct.setValueAt(product.getImagePath(), selectedRowIndex, 6);
+            
+            Product.updateProductFromDB(product);
+            
+            JOptionPane.showMessageDialog(this, "Update Successfully!");
+        } 
+        catch (NumberFormatException e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        clear();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtCostOfSaleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostOfSaleKeyTyped
+//         && !(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE)        
+        
+        if (!Character.isDigit(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_PERIOD)) 
+        {
+            evt.consume();
+        }
+
+//        if (Character.isDigit(evt.getKeyChar())) 
+//        {
+//            evt.consume();
+//        }
+    }//GEN-LAST:event_txtCostOfSaleKeyTyped
+
+    private void txtSalePriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalePriceKeyTyped
+        if (!Character.isDigit(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_PERIOD)) 
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSalePriceKeyTyped
+
+    private void spUnitInStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spUnitInStockKeyTyped
+        if (!Character.isDigit(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_PERIOD)) 
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_spUnitInStockKeyTyped
+
+    private void txtBarCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarCodeKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) 
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBarCodeKeyTyped
+
+    private void clear()
+    {
+        txtBarCode.setText("");
+        txtProductName.setText("");
+        txtCategory.setSelectedIndex(0);
+        spUnitInStock.setValue(0);
+        txtSalePrice.setText("0");
+        txtCostOfSale.setText("0");
+        
+        ImageIcon im = new ImageIcon("C:\\Users\\Tang Seakmeng\\Desktop\\Project\\Restaurant and PUB\\Image\\NoImageFound.png");
+        pictureBoxImage.setIcon(im);
+        
+        path = "C:\\Users\\Tang Seakmeng\\Desktop\\Project\\Restaurant and PUB\\Image\\NoImageFound.png";
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -345,7 +462,6 @@ public class Product_Managment extends javax.swing.JPanel {
     private javax.swing.JButton btnMoreCategory;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUploadImage;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

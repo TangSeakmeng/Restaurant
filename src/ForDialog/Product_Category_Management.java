@@ -8,7 +8,9 @@ package ForDialog;
 import ForClass.DataConnection;
 import ForClass.ProductCategory;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +32,8 @@ public class Product_Category_Management extends javax.swing.JDialog {
 //        showCategory();
     }
     
+    int maxCategoryId;
+    
     private void showCategory()
     {
         try 
@@ -47,10 +51,34 @@ public class Product_Category_Management extends javax.swing.JDialog {
             
             r.close();
         } 
-        catch (Exception e) 
+        catch (SQLException e) 
         {
             System.out.println(e.getMessage());
         }
+        
+        maxCategoryId = 0;
+        
+        try 
+        {
+            String sql = "select max(id) from tblCategory";
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+                maxCategoryId = Integer.parseInt(r.getString(1) + "");
+            }
+            
+            r.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        maxCategoryId++;
+        txtBarCode.setText(maxCategoryId + "");
+        txtBarCode.setEnabled(false);
     }
 
     /**
@@ -73,6 +101,11 @@ public class Product_Category_Management extends javax.swing.JDialog {
         btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         subJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +116,11 @@ public class Product_Category_Management extends javax.swing.JDialog {
             }
         ));
         subJTable1.setRowHeight(30);
+        subJTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                subJTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(subJTable1);
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
@@ -99,14 +137,18 @@ public class Product_Category_Management extends javax.swing.JDialog {
         jLabel4.setText("Category Name :");
 
         btnCancel.setBackground(new java.awt.Color(0, 153, 0));
-        btnCancel.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnCancel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnInsert.setBackground(new java.awt.Color(204, 51, 255));
-        btnInsert.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnInsert.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ForIcon/add_32px.png"))); // NOI18N
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +157,7 @@ public class Product_Category_Management extends javax.swing.JDialog {
         });
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 51));
-        btnDelete.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -125,9 +167,14 @@ public class Product_Category_Management extends javax.swing.JDialog {
         });
 
         btnUpdate.setBackground(new java.awt.Color(255, 102, 102));
-        btnUpdate.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,13 +237,95 @@ public class Product_Category_Management extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        
+        try {
+            ProductCategory productCategory = new ProductCategory();
+            
+            productCategory.setCategoryId(Integer.parseInt(txtBarCode.getText() + ""));
+            productCategory.setCategoryName(txtProductName.getText() + "");
+            
+            subJTable1.addRow(productCategory.getCategoryId(), productCategory.getCategoryName());
+            
+            ProductCategory.insertProductCategoryFromDB(productCategory);
+            
+            JOptionPane.showMessageDialog(this, "Insert Successfully!");
+            
+            maxCategoryId++;
+            txtBarCode.setText(maxCategoryId + "");
+        } 
+        catch (NumberFormatException e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
+        try {
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete this item?");
+            if(result == 0)
+            {
+                int countSelectedRow = subJTable1.getSelectedRowCount();
+
+                for(int index = 0; index < countSelectedRow; index++)
+                {
+                    Object[] r = subJTable1.getRowAt(selectedRowIndex);
+                    int id = Integer.parseInt(r[0] + "");
+                    ProductCategory.deleteProductCategoryFromDB(id);
+                }
+
+                subJTable1.removeSelectedRow();
+
+                JOptionPane.showMessageDialog(this, "Delete Successfully!");
+            }
+        } 
+        catch (NumberFormatException e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    int selectedRowIndex;
+    
+    private void subJTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subJTable1MouseClicked
+        selectedRowIndex = subJTable1.getSelectedRow();
+        Object[] r = subJTable1.getRowAt(selectedRowIndex);
+        
+        txtBarCode.setText(r[0] + "");
+        txtProductName.setText(r[1] + "");
+    }//GEN-LAST:event_subJTable1MouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        clear();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        try {
+            ProductCategory productCategory = new ProductCategory();
+            
+            productCategory.setCategoryId(Integer.parseInt(txtBarCode.getText() + ""));
+            productCategory.setCategoryName(txtProductName.getText() + "");
+            
+            subJTable1.setValueAt(productCategory.getCategoryName(), selectedRowIndex, 1);
+            
+            ProductCategory.updateProductCategoryFromDB(productCategory);
+            
+            JOptionPane.showMessageDialog(this, "Update Successfully!");
+        } 
+        catch (NumberFormatException e) 
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void clear()
+    {
+        txtBarCode.setText(maxCategoryId + "");
+        txtProductName.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */

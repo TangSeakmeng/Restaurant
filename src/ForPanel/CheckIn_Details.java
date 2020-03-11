@@ -5,14 +5,18 @@
  */
 package ForPanel;
 
-import ForJFrame.Main_Form;
+import javax.swing.JButton;
 
 /**
  *
  * @author Tang Seakmeng
  */
 public class CheckIn_Details extends javax.swing.JPanel {
-
+    
+    public JButton getBtnOrderService(){
+        return btnOrderService;
+    }
+    
     /**
      * Creates new form Table_Booking_Transaction
      */
@@ -29,7 +33,7 @@ public class CheckIn_Details extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnUpdate = new javax.swing.JButton();
+        btnOrderService = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -70,17 +74,17 @@ public class CheckIn_Details extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(20, 330, 490, 410);
 
-        btnUpdate.setBackground(new java.awt.Color(204, 0, 0));
-        btnUpdate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdate.setText("Order Service");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnOrderService.setBackground(new java.awt.Color(204, 0, 0));
+        btnOrderService.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnOrderService.setForeground(new java.awt.Color(255, 255, 255));
+        btnOrderService.setText("Order Service");
+        btnOrderService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnOrderServiceActionPerformed(evt);
             }
         });
-        add(btnUpdate);
-        btnUpdate.setBounds(1540, 750, 120, 46);
+        add(btnOrderService);
+        btnOrderService.setBounds(1540, 750, 120, 46);
 
         btnCancel.setText("Edit");
         add(btnCancel);
@@ -252,18 +256,20 @@ public class CheckIn_Details extends javax.swing.JPanel {
         btnCancel1.setBounds(20, 750, 83, 44);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-//        Main_Form.pn.removeAll();
-//        jp.setVisible(true);
-//        pnMain.setLayout(new java.awt.BorderLayout());
-//        pnMain.add(jp);
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    private void btnOrderServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderServiceActionPerformed
+        this.removeAll();
+        this.updateUI();
+        this.setLayout(new java.awt.CardLayout());
+        OC = new Order_Transaction();
+        this.add(OC);
+    }//GEN-LAST:event_btnOrderServiceActionPerformed
 
-
+    private ForPanel.Order_Transaction OC; 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancel1;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnOrderService;
     private javax.swing.JButton btnUpdate1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

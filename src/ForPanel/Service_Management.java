@@ -351,7 +351,7 @@ public class Service_Management extends javax.swing.JPanel {
             service.setImagePath(path);
             
             subJtableService.addRow(service.getServiceBarcode(), service.getServiceName(), 
-                    service.getCategoryName(), service.getSalePrice(), Service.getProductNameUsingProductBarcode(service.getProductBarcode()), service.getImagePath());
+                    service.getCategoryName(), service.getSalePrice(), Product.getProductNameUsingProductBarcode(service.getProductBarcode()), service.getImagePath());
             
             Service.addServiceIntoDB(service);
             clearAllInputComponents();
@@ -396,7 +396,7 @@ public class Service_Management extends javax.swing.JPanel {
                 for(int index = 0; index < arr_selectedRowIndex.length; index++)
                 {
                     Object[] item = subJtableService.getRowAt(arr_selectedRowIndex[index]);
-                    Service.deleteProductByBarcode(item[0].toString());          
+                    Service.deleteServiceByBarcode(item[0].toString());          
                 }
 
                 subJtableService.removeSelectedRow();
@@ -422,7 +422,7 @@ public class Service_Management extends javax.swing.JPanel {
         txtServiceName.setText(r[1].toString());
         cbCategory.setSelectedItem(r[2].toString());
         txtSalePrice.setText(r[3].toString());
-        txtProductBarcode.setText(Service.getProductIdUsingProductName(r[4].toString()) + "");
+        txtProductBarcode.setText(Product.getProductIdUsingProductName(r[4].toString()) + "");
     }//GEN-LAST:event_subJtableServiceMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -447,12 +447,12 @@ public class Service_Management extends javax.swing.JPanel {
                 subJtableService.setValueAt(service.getServiceName(), selectedRowIndex, 1);
                 subJtableService.setValueAt(service.getCategoryName(), selectedRowIndex, 2);
                 subJtableService.setValueAt(service.getSalePrice(), selectedRowIndex, 3);
-                subJtableService.setValueAt(Service.getProductNameUsingProductBarcode(service.getProductBarcode()), selectedRowIndex, 4);
+                subJtableService.setValueAt(Product.getProductNameUsingProductBarcode(service.getProductBarcode()), selectedRowIndex, 4);
                 subJtableService.setValueAt(path, selectedRowIndex, 5);
 
 //                JOptionPane.showMessageDialog(this, service.getCategoryName() + " : " + service.getCategoryId());
                 
-                Service.updateProductByBarcode(service);
+                Service.updateServiceByBarcode(service);
                 
                 JOptionPane.showMessageDialog(this, "Update Service(s) Successfully!");
                 clearAllInputComponents();

@@ -42,25 +42,24 @@ public class Service_Category_Management extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCancel.setBackground(new java.awt.Color(0, 153, 0));
-        btnCancel.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnCancel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 363, 88, 53));
 
         btnInsert.setBackground(new java.awt.Color(204, 51, 255));
-        btnInsert.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnInsert.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ForIcon/add_32px.png"))); // NOI18N
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 292, 136, 57));
+        getContentPane().add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 136, 57));
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 51));
-        btnDelete.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -68,10 +67,10 @@ public class Service_Category_Management extends javax.swing.JDialog {
                 btnDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 292, 103, 57));
+        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 103, 57));
 
         btnUpdate.setBackground(new java.awt.Color(255, 102, 102));
-        btnUpdate.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 361, 152, 57));

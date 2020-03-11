@@ -5,12 +5,8 @@
  */
 package ForUserControl;
 
-import ForClass.Temporary_Data;
 import ForComponent.SubJTable;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import org.graalvm.compiler.lir.LIRInstruction;
 
 /**
  *
@@ -221,10 +217,6 @@ public class ucService extends javax.swing.JPanel {
             for(int index = 0; index < n; index++)
             {
                 r = getOrder_table().getRowAt(index);
-
-                System.out.println(r.length);
-                System.out.println(r[0] + "");
-                System.out.println(r[1] + "");
 
                 name = r[0] + "";
                 amount = Integer.parseInt(r[1] + "");

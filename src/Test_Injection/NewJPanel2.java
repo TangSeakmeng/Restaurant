@@ -86,7 +86,8 @@ public class NewJPanel2 extends javax.swing.JPanel {
         System.out.println(mod.getRowCount());
     }//GEN-LAST:event_btnActionPerformed
 
-
+   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
     private Test_Injection.NewJPanel newJPanel1;

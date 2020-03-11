@@ -40,7 +40,7 @@ public class List_Services extends javax.swing.JPanel {
     public List_Services() {
         initComponents();  
         
-        
+        getUC("MainFood");
 //        System.out.println(order_table);
     }
     

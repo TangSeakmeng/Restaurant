@@ -7,7 +7,10 @@ package ForClass;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -54,28 +57,116 @@ public class ProductCategory {
         this.CategoryId = CategoryId;
     }
     
-    public static String getCategoryIdFromDB(String CategoryName)
+    public static void insertProductCategoryFromDB(ProductCategory productCategory)
     {
-        String CategoryId = "";
+        try 
+        {
+            String sql = "insert into tblcategory(categoryname) values(?)";
+            
+            PreparedStatement s = DataConnection.getDataCon().prepareStatement(sql);
+            
+            s.setString(1, productCategory.getCategoryName());
+            s.execute();
+            s.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void deleteProductCategoryFromDB(int productCategoryid)
+    {
+        try 
+        {
+            String sql = "delete from tblcategory where id = ?";
+            
+            PreparedStatement s = DataConnection.getDataCon().prepareStatement(sql);
+            
+            s.setString(1, productCategoryid + "");
+            s.execute();
+            s.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void updateProductCategoryFromDB(ProductCategory productCategory)
+    {
+        try 
+        {
+            String sql = "update tblcategory set categoryname = ? where id = ?";
+            
+            PreparedStatement s = DataConnection.getDataCon().prepareStatement(sql);
+            
+            s.setString(1, productCategory.getCategoryName()+ "");
+            s.setString(2, productCategory.getCategoryId() + "");
+            s.execute();
+            s.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static List<ProductCategory> getCategoryFromDB()
+    {
+        List<ProductCategory> list_productcategory = new ArrayList<>();
         
         try 
         {
-            String sql = "select id from tblCategory where CategoryName = '" + CategoryName + "'";
+            String sql = "select id, CategoryName from tblCategory";
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            ProductCategory pc;
+            
+            while(r.next())
+            {
+                pc = new ProductCategory();
+                
+                pc.setCategoryId(Integer.parseInt(r.getString(1)));
+                pc.setCategoryName(r.getString(2));
+                
+                list_productcategory.add(pc);
+            }
+            
+            r.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return list_productcategory;
+    }
+    
+    public static int getCategoryIdUsingCategoryName(String categoryName)
+    {
+        int categoryId = 1;
+        
+        try 
+        {
+            String sql = "select id from tblCategory where categoryName = '" + categoryName + "'";
+            
             Statement s = DataConnection.getDataCon().createStatement();
             ResultSet r = s.executeQuery(sql);
             
             while(r.next())
             {
-                CategoryId = r.getString(1);
+                categoryId = Integer.parseInt(r.getString(1) + "");
             }
             
             r.close();
         } 
-        catch (Exception e) 
+        catch (NumberFormatException | SQLException e) 
         {
             System.out.println(e.getMessage());
         }
         
-        return CategoryId;
+        return categoryId;
     }
 }

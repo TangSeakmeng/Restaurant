@@ -9,13 +9,58 @@ import javax.swing.ImageIcon;
 import ForClass.CenterScreenJFrame;
 import ForClass.DataConnection;
 import javax.swing.JOptionPane;
-import Test_Injection.Test_UC_Generator;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Tang Seakmeng
  */
 public class Log_In_Form extends javax.swing.JFrame {
+
+    /**
+     * @return the global_userid
+     */
+    public static String getGlobal_userid() {
+        return global_userid;
+    }
+
+    /**
+     * @param aGlobal_userid the global_userid to set
+     */
+    public static void setGlobal_userid(String aGlobal_userid) {
+        global_userid = aGlobal_userid;
+    }
+
+    /**
+     * @return the global_staffid
+     */
+    public static String getGlobal_staffid() {
+        return global_staffid;
+    }
+
+    /**
+     * @param aGlobal_staffid the global_staffid to set
+     */
+    public static void setGlobal_staffid(String aGlobal_staffid) {
+        global_staffid = aGlobal_staffid;
+    }
+
+    /**
+     * @return the global_username
+     */
+    public static String getGlobal_username() {
+        return global_username;
+    }
+
+    /**
+     * @param aGlobal_username the global_username to set
+     */
+    public static void setGlobal_username(String aGlobal_username) {
+        global_username = aGlobal_username;
+    }
 
     /**
      * Creates new form Log_In_Form
@@ -54,7 +99,7 @@ public class Log_In_Form extends javax.swing.JFrame {
         });
 
         btnLogIn.setBackground(new java.awt.Color(153, 0, 153));
-        btnLogIn.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnLogIn.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnLogIn.setForeground(new java.awt.Color(255, 255, 255));
         btnLogIn.setText("Log In");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -62,9 +107,14 @@ public class Log_In_Form extends javax.swing.JFrame {
                 btnLogInActionPerformed(evt);
             }
         });
+        btnLogIn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLogInKeyPressed(evt);
+            }
+        });
 
-        btnCancel.setBackground(new java.awt.Color(0, 153, 153));
-        btnCancel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnCancel.setBackground(new java.awt.Color(0, 102, 102));
+        btnCancel.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Exit");
         btnCancel.setAlignmentY(0.0F);
@@ -73,16 +123,31 @@ public class Log_In_Form extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+        btnCancel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCancelKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel1.setText("Welcome to Phnom Penh Restaurant");
 
         txtUserName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserNameKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel2.setText("Username :");
 
         txtPassword.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setText("Password :");
@@ -93,11 +158,11 @@ public class Log_In_Form extends javax.swing.JFrame {
         jPictureBox1.setLayout(jPictureBox1Layout);
         jPictureBox1Layout.setHorizontalGroup(
             jPictureBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGap(0, 486, Short.MAX_VALUE)
         );
         jPictureBox1Layout.setVerticalGroup(
             jPictureBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGap(0, 169, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,19 +170,17 @@ public class Log_In_Form extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
                         .addComponent(jLabel2)
                         .addGap(12, 12, 12)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(5, 5, 5)
                         .addComponent(jLabel3)
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,62 +189,100 @@ public class Log_In_Form extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jPictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2))
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel2))
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel3))
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private static String global_username;
+    private static String global_userid;
+    private static String global_staffid;
+    
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         String username = txtUserName.getText().trim();
         String password = txtPassword.getText().trim();
         
-        try {
+        try 
+        {
             DataConnection.ConnectionDB("127.0.0.1:3309", "db_restaurant", "root", "1234");
-            
-            this.setVisible(false);
-       
-            Main_Form main_form = new Main_Form();
-            main_form.setVisible(true);
         } 
         catch (Exception e) 
         {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        
+        boolean found = false;
+        
+        try 
+        {
+//            String sql = "SELECT count(*) from tbluser where username = '" + username + "' and password = '" + password + "' ;";
+            
+            String sql = "SELECT u.username, u.id, s.id from tbluser u inner join tblStaff s on u.staffid = s.id where u.username = '" + username + "' and u.password = '" + password + "' ;";
+            Statement s = DataConnection.getDataCon().createStatement();
+            ResultSet r = s.executeQuery(sql);
+            
+            while(r.next())
+            {
+//                if(Integer.parseInt(r.getString(1) + "") > 0)
+//                    found = true;
+                
+                global_username = r.getString(1) + "";
+                global_userid = r.getString(2) + "";
+                global_staffid = r.getString(3) + "";
+                
+                found = true;
+            }
+            
+            r.close();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        if(found)
+        {
+            this.setVisible(false);
+            Main_Form.main(null);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Log In Failed!");
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         CenterScreenJFrame.CenteredFrame(this);
         
-        ImageIcon im = new ImageIcon("C:\\Users\\Tang Seakmeng\\Desktop\\Project\\Restaurant and PUB\\Code\\Restaurant\\src\\ForImage\\logo.png");
+        ImageIcon im = new ImageIcon("D:\\Image_for_Restaurant\\Dashboard\\logo.png");
         jPictureBox1.setIcon(im);
     }//GEN-LAST:event_formWindowOpened
 
@@ -190,16 +291,36 @@ public class Log_In_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowStateChanged
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        try {
-            DataConnection.ConnectionDB("127.0.0.1:3309", "db_restaurant", "root", "1234");
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        
-        Test_UC_Generator.main(null);
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnLogInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogInKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            btnLogInActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnLogInKeyPressed
+
+    private void btnCancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCancelKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            btnCancelActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnCancelKeyPressed
+
+    private void txtUserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            btnLogInActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtUserNameKeyPressed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            btnLogInActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
